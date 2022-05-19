@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity2">
+    android:background="@color/white"
+    tools:context=".LoginActivity">
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
         style="@style/Widget.MaterialComponents.Toolbar"
@@ -19,6 +21,7 @@
 
 
     <ImageView
+        android:id="@+id/img"
         android:layout_width="407dp"
         android:layout_height="177dp"
         android:layout_marginTop="56dp"
@@ -37,14 +40,13 @@
         android:color="@color/white"
         android:elevation="4dp"
         android:hint="Email"
+        android:textColorHint="#7C7C7C"
         android:padding="16dp"
         android:radius="24dp"
         android:shape="rectangle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="256dp" />
+        app:layout_constraintTop_toBottomOf="@id/img"/>
 
     <EditText
         android:id="@+id/tvPassword"
@@ -54,12 +56,12 @@
         android:color="@color/white"
         android:elevation="4dp"
         android:hint="Password"
+        android:textColorHint="#7C7C7C"
         android:inputType="textPassword"
         android:padding="16dp"
         android:radius="24dp"
         android:shape="rectangle"
         app:layout_constraintEnd_toEndOf="@+id/etEmail"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etEmail"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
@@ -70,10 +72,10 @@
         android:layout_marginTop="44dp"
         android:backgroundTint="#f9a825"
         android:text="Log_in"
+        android:textColor="@color/white"
         android:textAllCaps="false"
         app:cornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="@+id/tvPassword"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvPassword"
         app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
 
@@ -85,6 +87,7 @@
         android:text="Don\'t have an account"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -97,11 +100,10 @@
         android:text="Sign up"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:textColor="@color/black"
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
