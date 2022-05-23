@@ -77,7 +77,7 @@ class RegisterActivity: AppCompatActivity() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this){
                 if(it.isSuccessful){
-                    val intent = Intent(this@RegisterActivity, AccountActivity::class.java).apply{
+                    val intent = Intent(this@RegisterActivity, MainActivity::class.java).apply{
                         val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
                     startActivity(intent)
