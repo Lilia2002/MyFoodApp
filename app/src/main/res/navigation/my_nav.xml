@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_selector">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_selector"
+    app:startDestination="@id/spashScreen1Fragment">
 
+    <fragment
+        android:id="@+id/introOneFragment"
+        android:name="com.example.myappfood.IntroOneFragment"
+        android:label="fragment_intro_two"
+        tools:layout="@layout/fragment_intro_two" >
+        <action
+            android:id="@+id/action_introOneFragment_to_introTwoFragment2"
+            app:destination="@id/introTwoFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/introThree1Fragment"
+        android:name="com.example.myappfood.IntroThree1Fragment"
+        android:label="fragment_intro_three1"
+        tools:layout="@layout/fragment_intro_three1" />
+    <fragment
+        android:id="@+id/introTwoFragment2"
+        android:name="com.example.myappfood.IntroTwoFragment"
+        android:label="IntroTwoFragment" >
+        <action
+            android:id="@+id/action_introTwoFragment2_to_introThree1Fragment"
+            app:destination="@id/introThree1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/spashScreen1Fragment"
+        android:name="com.example.myappfood.SpashScreen1Fragment"
+        android:label="fragment_spash_screen1"
+        tools:layout="@layout/fragment_spash_screen1" >
+        <action
+            android:id="@+id/action_spashScreen1Fragment_to_introOneFragment"
+            app:destination="@id/introOneFragment" />
+    </fragment>
 </navigation>

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -12,66 +13,79 @@ import com.google.firebase.auth.FirebaseUser
 
 
 class RegisterActivity: AppCompatActivity() {
-    lateinit var btnRegister : Button
-    lateinit var etEmail : EditText
-    lateinit var etPassword : EditText
+
+    lateinit var btn_register: Button
+    lateinit var et_email_register: EditText
+    lateinit var et_password_register: EditText
+    lateinit var et_name_register: EditText
+    lateinit var et_number_register: EditText
+    lateinit var et_confirm_password_register: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        etEmail = findViewById(R.id.etEmail)
-        etPassword=findViewById(R.id.tvPassword)
-        btnRegister = findViewById(R.id.btnRegister)
 
-        btnRegister.setOnClickListener {
-            when{
-                TextUtils.isEmpty(etEmail.text.toString().trim{it<=' '})->{
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Please enter email.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                TextUtils.isEmpty(etPassword.text.toString().trim{it<=' '})->{
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Please enter password.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                else->{
-                    val email:String= etEmail.text.toString().trim{it<=' '}
-                    val password:String= etPassword.text.toString().trim{it<=' '}
+        btn_register = findViewById(R.id.btn_register)
+        et_email_register = findViewById(R.id.et_email_register)
+        et_password_register = findViewById(R.id.et_password_register)
+        et_name_register = findViewById(R.id.et_name_register)
+        et_confirm_password_register = findViewById(R.id.et_confirm_password_register)
 
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val firebaseUser: FirebaseUser = task.result!!.user!!
-                                Toast.makeText(
-                                    this@RegisterActivity,
-                                    "You are registered successfully.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val intent =
-                                    Intent(this@RegisterActivity, MainActivity::class.java)
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                intent.putExtra("user_id", firebaseUser.uid)
-                                intent.putExtra("email_id", email)
-                                startActivity(intent)
-                                finish()
-                            } else {
-                                Toast.makeText(
-                                    this@RegisterActivity,
-                                    task.exception!!.message.toString(),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                }
+        btn_register.setOnClickListener {
+            val email = et_email_register.text.toString().trim()
+            val password = et_password_register.text.toString().trim()
+            val name = et_name_register.text.toString().trim()
+            val confirm_password = et_confirm_password_register.text.toString().trim()
+
+            if(name.isEmpty()){
+                et_name_register.error = "Please enter name"
+                et_name_register.requestFocus()
+                return@setOnClickListener
             }
+
+            if(email.isEmpty()){
+                et_email_register.error = "Please enter email"
+                et_email_register.requestFocus()
+                return@setOnClickListener
+            }
+
+            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                et_email_register.error = "Valid Email Required"
+                et_email_register.requestFocus()
+                return@setOnClickListener
+            }
+
+            if(password.isEmpty() || password.length<6){
+                et_password_register.error = "Please enter minimum 6 character password"
+                et_password_register.requestFocus()
+                return@setOnClickListener
+            }
+
+            if(password != confirm_password){
+                et_confirm_password_register.error = "Passwords must match"
+                et_confirm_password_register.requestFocus()
+                return@setOnClickListener
+            }
+
+            registerUser(email, password)
 
         }
 
+
+    }
+
+    private fun registerUser(email: String, password: String){
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this){
+                if(it.isSuccessful){
+                    val intent = Intent(this@RegisterActivity, AccountActivity::class.java).apply{
+                        val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(this@RegisterActivity, "Some Error ", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
 }

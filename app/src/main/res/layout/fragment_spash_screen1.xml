@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeScreenFragment">
+    tools:context=".SplashScreenActivity">
 
 
     <ImageView
@@ -41,22 +41,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnGetStart"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="128dp"
-            android:layout_marginTop="52dp"
-            android:background="#ECE2E2"
-            android:text="Get Started"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            app:cornerRadius="16dp"
-            app:layout_constraintStart_toStartOf="@+id/tvMeal"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:text="Loading..."
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvMeal"
-            app:layout_constraintWidth_percent="0.3" />
+            tools:ignore="MissingConstraints" />
 
         <View
+            android:id="@+id/view"
             android:layout_width="100dp"
             android:layout_height="4dp"
             android:layout_marginBottom="16dp"
