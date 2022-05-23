@@ -19,17 +19,11 @@ class IntroThree1Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_intro_three1, container, false)
         finish = view.findViewById(R.id.finish)
         finish.setOnClickListener {
-            findNavController().navigate(R.id.action_introThree1Fragment_to_account1Fragment2)
+            findNavController().navigate(R.id.action_introThree1Fragment_to_accountFragment2)
         }
 
         return view
     }
 
-    private fun onBoardingFinished(){
-        val sharedPref = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.putBoolean("Finished", true)
-        editor.apply()
-    }
 
 }

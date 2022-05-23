@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_nav"
+    app:startDestination="@id/splashScreenFragment">
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.myappfood.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_introOneFragment2"
+            app:destination="@id/introOneFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/introTwoFragment"
+        android:name="com.example.myappfood.IntroTwoFragment"
+        android:label="IntroTwoFragment" >
+        <action
+            android:id="@+id/action_introTwoFragment_to_introThree1Fragment"
+            app:destination="@id/introThree1Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/introOneFragment2"
+        android:name="com.example.myappfood.IntroOneFragment"
+        android:label="fragment_intro_one"
+        tools:layout="@layout/fragment_intro_one" >
+        <action
+            android:id="@+id/action_introOneFragment2_to_introTwoFragment"
+            app:destination="@id/introTwoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/introThree1Fragment"
+        android:name="com.example.myappfood.IntroThree1Fragment"
+        android:label="fragment_intro_three1"
+        tools:layout="@layout/fragment_intro_three1" >
+        <action
+            android:id="@+id/action_introThree1Fragment_to_accountFragment2"
+            app:destination="@id/accountFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment2"
+        android:name="com.example.myappfood.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
+</navigation>

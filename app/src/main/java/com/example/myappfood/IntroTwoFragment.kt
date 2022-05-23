@@ -22,7 +22,7 @@ class IntroTwoFragment : Fragment() {
         val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
         next2 = view.findViewById(R.id.next2)
         next2.setOnClickListener {
-            findNavController().navigate(R.id.action_introTwoFragment2_to_introThree1Fragment)
+            findNavController().navigate(R.id.action_introTwoFragment_to_introThree1Fragment)
         }
         return view
     }

@@ -25,7 +25,7 @@ class IntroOneFragment : Fragment() {
 
         next = view.findViewById(R.id.next)
         next.setOnClickListener {
-            findNavController().navigate(R.id.action_introOneFragment_to_introTwoFragment2)
+            findNavController().navigate(R.id.action_introOneFragment2_to_introTwoFragment)
         }
 
         return view
