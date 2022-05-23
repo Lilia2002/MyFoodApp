@@ -16,11 +16,10 @@ class IntroThree1Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_intro_three1, container, false)
         finish = view.findViewById(R.id.finish)
         finish.setOnClickListener {
-            onBoardingFinished()
+            findNavController().navigate(R.id.action_introThree1Fragment_to_account1Fragment2)
         }
 
         return view

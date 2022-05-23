@@ -18,7 +18,6 @@ class RegisterActivity: AppCompatActivity() {
     lateinit var et_email_register: EditText
     lateinit var et_password_register: EditText
     lateinit var et_name_register: EditText
-    lateinit var et_number_register: EditText
     lateinit var et_confirm_password_register: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {

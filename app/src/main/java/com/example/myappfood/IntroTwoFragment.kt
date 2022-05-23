@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 
 
@@ -16,14 +17,15 @@ class IntroTwoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_intro_two, container, false)
+        val view = inflater.inflate(R.layout.fragment_intro_two, container, false)
 
-        val viewPager =  activity?.findViewById<ViewPager2>(R.id.viewPager)
+        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
         next2 = view.findViewById(R.id.next2)
         next2.setOnClickListener {
-            viewPager?.currentItem = 2
+            findNavController().navigate(R.id.action_introTwoFragment2_to_introThree1Fragment)
         }
-
         return view
     }
-}
+
+
+    }

@@ -52,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this){
                 if(it.isSuccessful){
-                    val intent = Intent(this@LoginActivity, AccountActivity::class.java).apply{
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java).apply{
                         val flags =Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
                     startActivity(intent)
@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
 
         FirebaseAuth.getInstance().currentUser?.let {
-            val intent = Intent(this@LoginActivity,AccountActivity::class.java).apply{
+            val intent = Intent(this@LoginActivity,MainActivity::class.java).apply{
                 val flags =Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
             startActivity(intent)
