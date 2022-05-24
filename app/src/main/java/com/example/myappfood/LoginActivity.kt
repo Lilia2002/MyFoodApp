@@ -13,61 +13,47 @@ import com.example.myappfood.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
-  private  lateinit var binding: ActivityLoginBinding
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.tvSignup.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        binding.textView.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnLogin.setOnClickListener {
-            val email = binding.etEmail.text.toString().trim()
-            val password = binding.tvPassword.text.toString().trim()
+            val email = binding.emailEt.text.toString()
+            val pass = binding.passET.text.toString()
 
-            if (email.isEmpty()) {
-                binding.etEmail.error = "Please enter email"
-                binding.etEmail.requestFocus()
-                    
-            }
-            if(password.isEmpty() || password.length<6){
-                binding.tvPassword.error = "Please enter minimum 6 character password "
-                binding.tvPassword.requestFocus()
-                return@setOnClickListener
-            }
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                binding.etEmail.error = "Valid Email Required"
-                binding.etEmail.requestFocus()
-                return@setOnClickListener
-            }
-            loginUser(email, password)
-        }
+            if (email.isNotEmpty() && pass.isNotEmpty()) {
 
+                firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
-    }
-
-    private fun loginUser(email: String, password: String){
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this){
-                if(it.isSuccessful){
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java).apply{
-                        val flags =Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
-                    startActivity(intent)
-                }else{
-                    Toast.makeText(this@LoginActivity, "Some error", Toast.LENGTH_SHORT).show()
                 }
+            } else {
+                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+
             }
+        }
     }
     override fun onStart() {
         super.onStart()
 
-        FirebaseAuth.getInstance().currentUser?.let {
-            val intent = Intent(this@LoginActivity,MainActivity::class.java).apply{
-                val flags =Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
+        if(firebaseAuth.currentUser != null){
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

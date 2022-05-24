@@ -8,83 +8,53 @@ import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.myappfood.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 
 class RegisterActivity: AppCompatActivity() {
 
-    lateinit var btn_register: Button
-    lateinit var et_email_register: EditText
-    lateinit var et_password_register: EditText
-    lateinit var et_name_register: EditText
-    lateinit var et_confirm_password_register: EditText
+    private lateinit var binding: ActivityRegisterBinding
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
 
-        btn_register = findViewById(R.id.btn_register)
-        et_email_register = findViewById(R.id.et_email_register)
-        et_password_register = findViewById(R.id.et_password_register)
-        et_name_register = findViewById(R.id.et_name_register)
-        et_confirm_password_register = findViewById(R.id.et_confirm_password_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btn_register.setOnClickListener {
-            val email = et_email_register.text.toString().trim()
-            val password = et_password_register.text.toString().trim()
-            val name = et_name_register.text.toString().trim()
-            val confirm_password = et_confirm_password_register.text.toString().trim()
+        firebaseAuth = FirebaseAuth.getInstance()
 
-            if(name.isEmpty()){
-                et_name_register.error = "Please enter name"
-                et_name_register.requestFocus()
-                return@setOnClickListener
-            }
-
-            if(email.isEmpty()){
-                et_email_register.error = "Please enter email"
-                et_email_register.requestFocus()
-                return@setOnClickListener
-            }
-
-            if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                et_email_register.error = "Valid Email Required"
-                et_email_register.requestFocus()
-                return@setOnClickListener
-            }
-
-            if(password.isEmpty() || password.length<6){
-                et_password_register.error = "Please enter minimum 6 character password"
-                et_password_register.requestFocus()
-                return@setOnClickListener
-            }
-
-            if(password != confirm_password){
-                et_confirm_password_register.error = "Passwords must match"
-                et_confirm_password_register.requestFocus()
-                return@setOnClickListener
-            }
-
-            registerUser(email, password)
-
+        binding.tvLogin.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
+        binding.btnRegister.setOnClickListener {
+            val email = binding.emailEt.text.toString()
+            val pass = binding.passET.text.toString()
+            val confirmPass = binding.confirmPassEt.text.toString()
 
+            if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()) {
+                if (pass == confirmPass) {
 
-    }
+                    firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val intent = Intent(this, LoginActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
-    private fun registerUser(email: String, password: String){
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this){
-                if(it.isSuccessful){
-                    val intent = Intent(this@RegisterActivity, MainActivity::class.java).apply{
-                        val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
                     }
-                    startActivity(intent)
-                }else{
-                    Toast.makeText(this@RegisterActivity, "Some Error ", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
                 }
+            } else {
+                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+
             }
+        }
     }
 
 }

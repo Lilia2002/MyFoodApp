@@ -21,8 +21,6 @@ class IntroOneFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_intro_one, container, false)
 
-        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewPager)
-
         next = view.findViewById(R.id.next)
         next.setOnClickListener {
             findNavController().navigate(R.id.action_introOneFragment2_to_introTwoFragment)
