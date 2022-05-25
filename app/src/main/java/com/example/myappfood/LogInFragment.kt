@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.myappfood.databinding.FragmentLogInBinding
+import com.example.myappfood.databinding.FragmentSplashScreenBinding
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -20,10 +21,9 @@ class LogInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLogInBinding.inflate(layoutInflater)
-
             firebaseAuth = FirebaseAuth.getInstance()
-            binding.textView.setOnClickListener {
-                findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
+            binding.tvSignup.setOnClickListener {
+                findNavController().navigate(R.id.action_logInFragment2_to_signUpFragment2)
             }
 
             binding.btnLogin.setOnClickListener {
@@ -34,7 +34,7 @@ class LogInFragment : Fragment() {
 
                     firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            findNavController().navigate(R.id.action_logInFragment_to_accountFragment)
+                            findNavController().navigate(R.id.action_logInFragment2_to_homeFragment2)
                         } else {
                             Toast.makeText(context,
                                 it.exception.toString(),
@@ -57,7 +57,7 @@ class LogInFragment : Fragment() {
         super.onStart()
 
         if(firebaseAuth.currentUser != null){
-            findNavController().navigate(R.id.action_logInFragment_to_accountFragment)
+            findNavController().navigate(R.id.action_logInFragment2_to_homeFragment2)
         }
 
     }

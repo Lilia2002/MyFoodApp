@@ -19,11 +19,10 @@ class IntroThree1Fragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_intro_three1, container, false)
         finish = view.findViewById(R.id.finish)
         finish.setOnClickListener {
-            findNavController().navigate(R.id.action_introThree1Fragment_to_accountFragment2)
+            findNavController().navigate(R.id.action_introThree1Fragment_to_logInFragment2)
         }
 
         return view
     }
-
 
 }

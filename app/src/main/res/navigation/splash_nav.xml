@@ -36,12 +36,36 @@
         android:label="fragment_intro_three1"
         tools:layout="@layout/fragment_intro_three1" >
         <action
-            android:id="@+id/action_introThree1Fragment_to_accountFragment2"
-            app:destination="@id/accountFragment2" />
+            android:id="@+id/action_introThree1Fragment_to_logInFragment2"
+            app:destination="@id/logInFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/accountFragment2"
-        android:name="com.example.myappfood.AccountFragment"
-        android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        android:id="@+id/logInFragment2"
+        android:name="com.example.myappfood.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment2_to_signUpFragment2"
+            app:destination="@id/signUpFragment2" />
+        <action
+            android:id="@+id/action_logInFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment2"
+        android:name="com.example.myappfood.SignUpFragment"
+        android:label="SignUpFragment" >
+
+        <action
+            android:id="@+id/action_signUpFragment2_to_logInFragment2"
+            app:destination="@id/logInFragment2" />
+        <action
+            android:id="@+id/action_signUpFragment2_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.example.myappfood.HomeFragment"
+        android:label="HomeFragment" />
 </navigation>

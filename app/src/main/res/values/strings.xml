@@ -15,4 +15,7 @@
     <string name="enjoy_your_meal">Enjoy_your_meal</string>
     <string name="next">Next</string>
     <string name="food_delivery">Thanks to our food delivery apps, you can now get your favourite burger delivered to your doorstep from your choice of restaurant in town.</string>
+    <string name="save">Save</string>
+    <string name="edit_profile">Edit_profile</string>
+    <string name="cancel">Cancel</string>
 </resources>
