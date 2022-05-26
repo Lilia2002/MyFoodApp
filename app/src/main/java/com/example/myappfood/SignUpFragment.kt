@@ -42,9 +42,9 @@ class SignUpFragment : Fragment() {
 
             if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty()) {
                 if (pass == confirmPass) {
-
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
+                            binding.progressBar.visibility=View.VISIBLE
                             createNewUser()
                             findNavController().navigate(R.id.action_signUpFragment2_to_homeFragment2)
                         } else {

@@ -6,43 +6,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
+import com.example.myappfood.databinding.FragmentAccountBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserInfo
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
+
 
 
 class AccountFragment : Fragment() {
-    lateinit var tv_userid: TextView
-    lateinit var tv_emailid: TextView
-    lateinit var btnLogout: Button
+    private lateinit var  binding: FragmentAccountBinding
 
-    private var userId: String? = null
-    private var emailId: String? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            userId = it.getString("user_id")
-            emailId = it.getString("email_id")
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_account, container, false)
 
+        binding= FragmentAccountBinding.inflate(layoutInflater)
+        return binding.root
 
-        btnLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-
-        }
-        return view
     }
     private fun readDataFirestore() {
         val db = Firebase.firestore
@@ -54,13 +38,11 @@ class AccountFragment : Fragment() {
                     for (document in result) {
                         if ((document.get("idUser")
                                 .toString()) == (FirebaseAuth.getInstance().uid).toString()
-                        ) {
+                       ) {
 
 
-                                document.get("name").toString()
-                                document.get("email").toString()
-                                document.get("userURLtoImage").toString()
-
+                            binding.accountName.text =  document.get("name").toString()
+                            binding.accountEmail.text=document.get("email").toString()
 
 
                         }
@@ -74,6 +56,11 @@ class AccountFragment : Fragment() {
                     )
                 }
         }
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        readDataFirestore()
+
     }
 }
 

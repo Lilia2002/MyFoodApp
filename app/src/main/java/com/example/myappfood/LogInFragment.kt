@@ -34,6 +34,7 @@ class LogInFragment : Fragment() {
 
                     firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
+                            binding.progressBar.visibility=View.VISIBLE
                             findNavController().navigate(R.id.action_logInFragment2_to_homeFragment2)
                         } else {
                             Toast.makeText(context,

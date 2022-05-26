@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_introTwoFragment_to_introThree1Fragment"
             app:destination="@id/introThree1Fragment" />
+        <action
+            android:id="@+id/action_introTwoFragment_to_signUpFragment2"
+            app:destination="@id/signUpFragment2" />
     </fragment>
     <fragment
         android:id="@+id/introOneFragment2"
@@ -29,6 +32,9 @@
         <action
             android:id="@+id/action_introOneFragment2_to_introTwoFragment"
             app:destination="@id/introTwoFragment" />
+        <action
+            android:id="@+id/action_introOneFragment2_to_signUpFragment2"
+            app:destination="@id/signUpFragment2" />
     </fragment>
     <fragment
         android:id="@+id/introThree1Fragment"
@@ -36,8 +42,8 @@
         android:label="fragment_intro_three1"
         tools:layout="@layout/fragment_intro_three1" >
         <action
-            android:id="@+id/action_introThree1Fragment_to_logInFragment2"
-            app:destination="@id/logInFragment2" />
+            android:id="@+id/action_introThree1Fragment_to_signUpFragment2"
+            app:destination="@id/signUpFragment2" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment2"
@@ -68,4 +74,13 @@
         android:id="@+id/homeFragment2"
         android:name="com.example.myappfood.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.myappfood.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_logInFragment2"
+            app:destination="@id/logInFragment2" />
+    </fragment>
 </navigation>

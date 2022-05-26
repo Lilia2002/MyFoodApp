@@ -60,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:hint="Type your Email"
+                android:drawableStart="@drawable/ic_email"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,8 +85,8 @@
                 style="@style/LoginTextInputInnerFieldStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Type Your Password"
-                android:inputType="textPassword" />
+                android:drawableStart="@drawable/ic_password_2"
+                android:hint="Type Your Password" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -100,6 +101,7 @@
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             app:cornerRadius="16dp"
+            android:fontFamily="@font/montserrat_bold"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.062"
@@ -112,9 +114,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24sp"
             android:text="Don\'t have an account"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -124,11 +126,12 @@
             android:id="@+id/tvSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black"
             android:layout_marginStart="8dp"
+            android:text="Sign up"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="#f9a825"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="@+id/textView" />
 
