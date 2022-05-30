@@ -39,8 +39,6 @@ class AccountFragment : Fragment() {
                         if ((document.get("idUser")
                                 .toString()) == (FirebaseAuth.getInstance().uid).toString()
                        ) {
-
-
                             binding.accountName.text =  document.get("name").toString()
                             binding.accountEmail.text=document.get("email").toString()
 
@@ -60,7 +58,12 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         readDataFirestore()
-
+//        if(Value.gender){
+//            binding.profileUserIcon.setImageResource(R.drawable.user_male)
+// }else
+//            binding.profileUserIcon.setImageResource(R.drawable.user_female)
+    }
+    fun chooseImageFromGallery(view: View) {
     }
 }
 

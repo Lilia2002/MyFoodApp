@@ -1,59 +1,88 @@
 package com.example.myappfood
 
+
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myappfood.databinding.FragmentMenuBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MenuFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MenuFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var auth: FirebaseAuth
+    private lateinit var databaseRef: DatabaseReference
+    private val db = DatabaseHandler(context)
+    private lateinit var foodItemAdapter: FoodItemAdapter
+    private var allItems = ArrayList<ModelMenu>()
+    private lateinit var itemRecyclerView: RecyclerView
+    private lateinit var searchBox: SearchView
+    lateinit var binding: FragmentMenuBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false)
+        itemRecyclerView=view?.findViewById(R.id.items_recycler_view)!!
+        binding = FragmentMenuBinding.inflate(inflater)
+        return binding.root
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MenuFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MenuFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val list = mutableListOf<ModelMenu>(
+            ModelMenu("1", "1", 1.0F, 1.0F, 1),
+            ModelMenu("2", "1", 1.0F, 1.0F, 1),
+            ModelMenu("3", "1", 1.0F, 1.0F, 1),
+            ModelMenu("4", "1", 1.0F, 1.0F, 1),
+        )
+        binding.itemsRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        foodItemAdapter = FoodItemAdapter(list)
+        binding.itemsRecyclerView.adapter = foodItemAdapter
     }
-}
+    private fun loadMenu() {
+            val db = Firebase.firestore
+        Firebase.auth.currentUser?.let {
+            db.collection("users")
+                .get()
+                .addOnSuccessListener { result ->
+                    //  CoroutineScope(Dispatchers.IO).launch {
+                    allItems  = arrayListOf()
+                    for (document in result) {
+                        allItems += (
+                                ModelMenu(
+                                    document.get("item_name").toString(),
+                                    document.get("picture").toString(),
+                                    document.get("Stars").toString().toFloat(),
+                                    document.get("price").toString().toFloat(),
+                                )
+                                )
+                    }
+
+                }
+        }
+            ?.addOnFailureListener { exception ->
+                Log.w("TAG", "Error getting documents.", exception)
+            }
+            }
+    private fun startAdapter(){
+        //adapter=
+    }
+
+        }
+

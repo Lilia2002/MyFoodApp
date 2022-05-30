@@ -57,6 +57,7 @@
             android:id="@+id/action_logInFragment2_to_homeFragment2"
             app:destination="@id/homeFragment2" />
 
+
     </fragment>
     <fragment
         android:id="@+id/signUpFragment2"
@@ -66,6 +67,7 @@
         <action
             android:id="@+id/action_signUpFragment2_to_logInFragment2"
             app:destination="@id/logInFragment2" />
+
         <action
             android:id="@+id/action_signUpFragment2_to_homeFragment2"
             app:destination="@id/homeFragment2" />
@@ -74,13 +76,4 @@
         android:id="@+id/homeFragment2"
         android:name="com.example.myappfood.HomeFragment"
         android:label="HomeFragment" />
-    <fragment
-        android:id="@+id/accountFragment"
-        android:name="com.example.myappfood.AccountFragment"
-        android:label="fragment_account"
-        tools:layout="@layout/fragment_account" >
-        <action
-            android:id="@+id/action_accountFragment_to_logInFragment2"
-            app:destination="@id/logInFragment2" />
-    </fragment>
 </navigation>
